@@ -1,0 +1,116 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "registry_row",
+  "title": "Project Registry Row",
+  "description": "One row in project_registry.csv. Auto-generated from ENA metadata, manually reviewed before Phase 3.",
+  "type": "object",
+  "required": ["bioproject_accession", "primary_pmid"],
+  "properties": {
+    "bioproject_accession": {
+      "type": "string",
+      "pattern": "^(PRJ[A-Z]{2}|ERP|SRP)\\d+$",
+      "description": "BioProject accession (PRJNA, PRJEB, PRJDB, ERP, SRP)"
+    },
+    "keep_flag": {
+      "type": "string",
+      "enum": ["TRUE", "FALSE"],
+      "default": "TRUE"
+    },
+    "scope_basis": {
+      "type": "string",
+      "description": "Why this project is in scope (e.g., 'current_project_paper_audit_2026-10-27')"
+    },
+    "primary_pmid": {
+      "type": "string",
+      "pattern": "^\\d{7,8}$",
+      "description": "Primary PubMed ID for the main paper"
+    },
+    "additional_pmids": {
+      "type": "string",
+      "description": "Semicolon-separated additional PMIDs"
+    },
+    "paper_count": {
+      "type": "string",
+      "description": "Number of papers associated with this project"
+    },
+    "run_n_local": {
+      "type": "string",
+      "description": "Number of runs in local download"
+    },
+    "biosample_n_local": {
+      "type": "string",
+      "description": "Number of biosamples in local download"
+    },
+    "sample_name_n_local": {
+      "type": "string",
+      "description": "Number of unique sample names"
+    },
+    "has_intervention_metadata": {
+      "type": "string",
+      "enum": ["True", "False", ""],
+      "description": "Does the raw metadata contain intervention-group tags?"
+    },
+    "has_timepoint_metadata": {
+      "type": "string",
+      "enum": ["True", "False", ""],
+      "description": "Does the raw metadata contain timepoint information?"
+    },
+    "raw_group_values": {
+      "type": "string",
+      "description": "Semicolon-separated unique group identifiers found in metadata"
+    },
+    "raw_intervention_values": {
+      "type": "string",
+      "description": "Semicolon-separated unique intervention-related values"
+    },
+    "raw_disease_values": {
+      "type": "string",
+      "description": "Semicolon-separated unique disease-related values"
+    },
+    "study_design_candidate": {
+      "type": "string",
+      "enum": [
+        "observational_or_unclear",
+        "intervention_or_longitudinal_candidate",
+        ""
+      ],
+      "description": "Auto-detected study design guess (before paper verification)"
+    },
+    "training_readiness_candidate": {
+      "type": "string",
+      "enum": [
+        "conditionally_ready",
+        "pretraining_only_candidate",
+        ""
+      ],
+      "description": "Estimated readiness for downstream analysis"
+    },
+    "manual_review_status": {
+      "type": "string",
+      "enum": [
+        "pending_paper_verification",
+        "pending_paper_table_supplement_verification",
+        "verified",
+        "needs_manual_curation"
+      ],
+      "default": "pending_paper_verification"
+    },
+    "supplement_status": {
+      "type": "string",
+      "enum": ["to_be_verified", "downloaded", "verified", "not_applicable"],
+      "default": "to_be_verified"
+    },
+    "common_subject_id_fields": {
+      "type": "string",
+      "description": "Detected attribute keys likely containing subject IDs"
+    },
+    "common_timepoint_fields": {
+      "type": "string",
+      "description": "Detected attribute keys likely containing timepoint info"
+    },
+    "available_host_fields": {
+      "type": "string",
+      "description": "Comma-separated list of available ENA structured host fields"
+    }
+  }
+}

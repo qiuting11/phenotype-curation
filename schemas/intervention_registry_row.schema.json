@@ -1,0 +1,91 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "intervention_registry_row",
+  "title": "Intervention Registry Row",
+  "description": "One row in project_intervention_registry.csv. Paper-verified study design classification. Output of Phase 3.",
+  "type": "object",
+  "required": ["bioproject", "study_design", "intervention_type", "primary_pmid"],
+  "properties": {
+    "bioproject": {
+      "type": "string",
+      "pattern": "^(PRJ[A-Z]{2}|ERP|SRP)\\d+$"
+    },
+    "study_design": {
+      "type": "string",
+      "enum": [
+        "observational_cohort",
+        "RCT",
+        "RCT_crossover",
+        "dose_escalation"
+      ],
+      "description": "Verified study design from paper Methods"
+    },
+    "intervention_type": {
+      "type": "string",
+      "enum": [
+        "observational",
+        "immunotherapy",
+        "diet",
+        "diet_prebiotic",
+        "fmt",
+        "probiotic",
+        "vaginal_seeding"
+      ]
+    },
+    "arms": {
+      "type": "string",
+      "description": "Semicolon-separated study arm names (e.g., 'FMT;Placebo')"
+    },
+    "control_type": {
+      "type": "string",
+      "description": "Type of control (placebo, habitual_diet, run_in_baseline, within_subject, N/A)"
+    },
+    "randomization": {
+      "type": "string",
+      "enum": ["yes", "no", ""],
+      "default": "no"
+    },
+    "blinding": {
+      "type": "string",
+      "enum": ["double_blind", "single_blind", "open_label", ""],
+      "description": "Blinding status"
+    },
+    "sample_timing": {
+      "type": "string",
+      "description": "Human-readable sampling schedule (e.g., 'run_in_2wk_feeding_4wk_washout_4wk')"
+    },
+    "primary_pmid": {
+      "type": "string",
+      "pattern": "^\\d{7,8}$"
+    },
+    "primary_pmc": {
+      "type": "string",
+      "pattern": "^PMC\\d+$",
+      "description": "PMC ID for full-text access"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Free-text notes about study design"
+    },
+    "is_one_time": {
+      "type": "string",
+      "enum": ["yes", "no", ""],
+      "default": "",
+      "description": "Is the intervention delivered once (single dose/procedure) vs ongoing? Determines is_intervention classification."
+    },
+    "sample_timing_schedule": {
+      "type": "string",
+      "description": "Human-readable: list sample collection timepoints (e.g., 'day -14, 0, 7, 14, 28, 56')"
+    },
+    "days_since_intervention": {
+      "type": "string",
+      "description": "Numeric days from intervention start for each timepoint (e.g., '[0, 14, 28]')"
+    },
+    "classification_confidence": {
+      "type": "string",
+      "enum": ["verified", "good", "moderate", "low"],
+      "default": "good",
+      "description": "How reliable is this classification? verified=paper supplement day-level data, good=clear Methods, moderate=some ambiguity, low=paper unavailable or cross-sectional mixed timing"
+    }
+  }
+}

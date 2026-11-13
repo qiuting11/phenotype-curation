@@ -1,0 +1,66 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "traceability_row",
+  "title": "Intervention Traceability Row",
+  "description": "One row in is_intervention_traceability.csv. Decision audit trail linking each bioproject's is_intervention classification back to paper evidence. Output of Phase 5.",
+  "type": "object",
+  "required": ["bioproject", "intervention_type", "study_design"],
+  "properties": {
+    "bioproject": {
+      "type": "string",
+      "pattern": "^(PRJ[A-Z]{2}|ERP|SRP)\\d+$"
+    },
+    "intervention_type": {
+      "type": "string",
+      "enum": [
+        "observational",
+        "immunotherapy",
+        "diet",
+        "diet_prebiotic",
+        "fmt",
+        "probiotic",
+        "vaginal_seeding"
+      ]
+    },
+    "study_design": {
+      "type": "string",
+      "enum": [
+        "observational_cohort",
+        "RCT",
+        "RCT_crossover",
+        "dose_escalation"
+      ]
+    },
+    "paper_pmcid": {
+      "type": "string",
+      "pattern": "^PMC\\d+$",
+      "description": "PMC ID of paper used for classification"
+    },
+    "key_design_finding": {
+      "type": "string",
+      "description": "Key design finding from the paper that drove the classification"
+    },
+    "is_intervention_rationale": {
+      "type": "string",
+      "description": "Detailed reasoning behind is_intervention decision"
+    },
+    "is_intervention_yes": {
+      "type": "string",
+      "description": "Description of which sample groups/timepoints are is_intervention=yes and why"
+    },
+    "is_intervention_no": {
+      "type": "string",
+      "description": "Description of which sample groups/timepoints are is_intervention=no and why"
+    },
+    "is_intervention_unknown": {
+      "type": "string",
+      "description": "Description of which sample groups/timepoints could not be classified"
+    },
+    "evidence_quality": {
+      "type": "string",
+      "enum": ["verified", "good", "moderate", "low"],
+      "default": "good",
+      "description": "How reliable is the underlying paper evidence?"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "phenotype-curation"
+version = "0.1.0"
+description = "5-phase pipeline for metagenomics biosample phenotype curation"
+requires-python = ">=3.10"
+dependencies = [
+    "jsonschema>=4.0",
+]
+
+[project.optional-dependencies]
+supplements = ["openpyxl>=3.0", "pdfplumber>=0.10"]
+all = ["openpyxl>=3.0", "pdfplumber>=0.10"]
+
+[project.scripts]
+phenotype-curation = "cli:main"
+
+[tool.setuptools.packages.find]
+include = ["core*", "phases*", "schemas*", "templates*"]
+
+[tool.setuptools]
+py-modules = ["cli"]

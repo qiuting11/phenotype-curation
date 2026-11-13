@@ -1,0 +1,171 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "phenotype_row",
+  "title": "Phenotype Clean Row",
+  "description": "One row in phenotype_clean.csv. Output of Phase 4. 36 columns per biosample.",
+  "type": "object",
+  "required": ["bioproject", "biosample_id", "run_accession", "subject_id"],
+  "properties": {
+    "bioproject": {
+      "type": "string",
+      "pattern": "^(PRJ[A-Z]{2}|ERP|SRP)\\d+$"
+    },
+    "biosample_id": {
+      "type": "string",
+      "description": "BioSample accession (SRS/SAMN/SAMEA)"
+    },
+    "run_accession": {
+      "type": "string",
+      "description": "Semicolon-delimited run accessions"
+    },
+    "subject_id": {
+      "type": "string",
+      "description": "Cleaned per-project subject identifier"
+    },
+    "sample_id_local": {
+      "type": "string",
+      "description": "Local sample identifier from ENA sample_name or paper"
+    },
+    "sample_type": {
+      "type": "string",
+      "description": "Sample type (feces, blood, saliva, etc.)"
+    },
+    "collection_date": {
+      "type": "string",
+      "description": "Date of sample collection"
+    },
+    "library_layout": {
+      "type": "string",
+      "enum": ["PAIRED", "SINGLE", ""],
+      "description": "Sequencing library layout"
+    },
+    "platform": {
+      "type": "string",
+      "description": "Sequencing instrument platform (truncated to 60 chars)"
+    },
+    "disease": {
+      "type": "string",
+      "description": "Disease label (NSCLC, melanoma, ulcerative_colitis, healthy, etc.)"
+    },
+    "intervention_type": {
+      "type": "string",
+      "description": "High-level intervention category (immunotherapy, fmt, diet, etc.)"
+    },
+    "intervention_agent": {
+      "type": "string",
+      "description": "Specific agent/substance description"
+    },
+    "intervention_group": {
+      "type": "string",
+      "description": "Sample-level group assignment (FMT, placebo, FOS_Cohort_1, etc.)"
+    },
+    "intervention_source": {
+      "type": "string",
+      "description": "Source file or API for intervention group"
+    },
+    "host_age": {
+      "type": "string",
+      "description": "Subject age (original units from metadata)"
+    },
+    "host_sex": {
+      "type": "string",
+      "enum": ["male", "female", "", "unknown"],
+      "description": "Subject sex"
+    },
+    "host_bmi": {
+      "type": "string",
+      "description": "Subject BMI"
+    },
+    "ethnicity": {
+      "type": "string",
+      "description": "Subject ethnicity from supplement evidence"
+    },
+    "clinical_outcome": {
+      "type": "string",
+      "description": "Clinical outcome from supplement evidence"
+    },
+    "phenotype_source": {
+      "type": "string",
+      "description": "Source of phenotype data (ncbi_biosample, supplement_xlsx, ena_xml, etc.)"
+    },
+    "timepoint_label": {
+      "type": "string",
+      "description": "Granular phase label (baseline, run_in, feeding_1, feeding_2, washout, on_treatment, followup, etc.)"
+    },
+    "timepoint_index": {
+      "type": "string",
+      "description": "Numeric timepoint index (day or sample sequence number)"
+    },
+    "timepoint_unit": {
+      "type": "string",
+      "enum": ["timepoint_index", "day", "week", ""],
+      "description": "Unit of timepoint_index"
+    },
+    "is_intervention": {
+      "type": "string",
+      "enum": ["yes", "no", "unknown"],
+      "description": "Is this sample from an active intervention period?"
+    },
+    "paired_pre_sample": {
+      "type": "string",
+      "description": "Preceding sample accession(s) for this subject, semicolon-delimited"
+    },
+    "paired_post_sample": {
+      "type": "string",
+      "description": "Following sample accession(s) for this subject"
+    },
+    "sample_seq": {
+      "type": "string",
+      "description": "Sequence number (1-based) within subject"
+    },
+    "total_samples": {
+      "type": "string",
+      "description": "Total distinct timepoints for this subject"
+    },
+    "pairing_confidence": {
+      "type": "string",
+      "enum": ["confirmed", "candidate", "unpaired", ""],
+      "description": "How confident is the longitudinal pairing?"
+    },
+    "parallel_samples": {
+      "type": "string",
+      "description": "Other biosamples at same timepoint + same intervention group"
+    },
+    "context_role": {
+      "type": "string",
+      "description": "Contextual role of this ID (donor, mum, baby, family)"
+    },
+    "context_id": {
+      "type": "string",
+      "description": "Contextual identifier (donor_id, mum_id, baby_id)"
+    },
+    "family_id": {
+      "type": "string",
+      "description": "Family group identifier"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Free-text notes (protocol deviations, mapping issues, etc.)"
+    },
+    "subject_id_status": {
+      "type": "string",
+      "description": "Status of subject ID assignment"
+    },
+    "subject_id_confidence": {
+      "type": "string",
+      "enum": [
+        "parsed",
+        "parsed_matches_supplement",
+        "parsed_cohort_subject",
+        "parsed_numeric_only",
+        "parsed_family_level",
+        "parsed_baby_mum_pair",
+        "candidate_only_not_verified",
+        "low_quality_short_code",
+        "cannot_parse",
+        "unparsed"
+      ],
+      "description": "Confidence level of subject ID parsing"
+    }
+  }
+}

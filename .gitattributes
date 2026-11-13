@@ -1,0 +1,22 @@
+# Auto-detect text files, normalize to LF in repo
+* text=auto
+
+# Python files
+*.py text eol=lf
+*.pyi text eol=lf
+
+# Data formats
+*.csv text eol=lf
+*.tsv text eol=lf
+*.json text eol=lf
+*.schema.json text eol=lf
+
+# Docs
+*.md text eol=lf
+*.toml text eol=lf
+*.txt text eol=lf
+
+# Binary
+*.xlsx binary
+*.pdf binary
+*.png binary
